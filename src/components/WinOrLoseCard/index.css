@@ -1,1 +1,48 @@
-/* Write your code here. */
+.ResultContainer {
+  width: 35%;
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  padding: 12px;
+  border: 2px solid #ffffff30;
+  background-color: #ffffff33;
+}
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 18px;
+}
+.resultHeading {
+  color: #ffffff;
+  font-size: 35px;
+}
+.resultPara {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
+.resultPara1 {
+  color: #6a59ff;
+  font-size: 30px;
+  font-weight: bold;
+}
+.playAgainButton {
+  background-color: #ffce27;
+  color: #000000;
+  outline: none;
+  font-weight: bold;
+  cursor: pointer;
+  border: 0 none;
+  height: 45px;
+  width: 100px;
+  border-radius: 15px;
+}
+.resultImg {
+  width: 205px;
+  height: 255px;
+}

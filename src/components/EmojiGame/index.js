@@ -12,9 +12,9 @@ const shuffledEmojisList = () => {
 
 import {Component} from 'react'
 
-import {v4 as uuidv4} from 'uuid'
-
 import NavbarItem from '../NavBar'
+
+import {Win, Loose} from '../WinOrLoseCard'
 
 import './index.css'
 
@@ -97,24 +97,55 @@ class EmojiGame extends Component {
     emojisList: initialEmojisList,
     standardList: initialEmojisList,
     emojiClicked: [],
+    count: 0,
+    topScore: 0,
+    result: false,
+    won: false,
+    scoreCard: 0,
+  }
+
+  startGame = () => {
+    this.setState({emojiClicked: [], result: false})
   }
 
   emojiClicked = id => {
-    console.log(id)
-    const {emojisList, emojiClicked, standardList} = this.state
+    const {
+      emojisList,
+      emojiClicked,
+      standardList,
+      count,
+      topScore,
+      result,
+    } = this.state
+    let bestScore
     const isEmojiClicked = emojiClicked.includes(
       emojiClicked.find(eachItem => eachItem.id === id),
     )
+    if (count === 12) {
+      this.setState({won: true})
+    }
     if (isEmojiClicked === true) {
       console.log('You lost the game')
+      console.log(count)
+      if (count >= topScore) {
+        bestScore = count
+      } else {
+        bestScore = topScore
+      }
+      this.setState({
+        topScore: bestScore,
+        count: 0,
+        won: false,
+        result: !result,
+        scoreCard: count,
+      })
     } else {
       console.log('Continue')
       const item = standardList.find(each => each.id === id)
-      console.log(item)
       this.setState(prevState => ({
         emojiClicked: [...prevState.emojiClicked, item],
+        count: prevState.count + 1,
       }))
-      console.log(emojiClicked)
     }
 
     const shuffledEmojisList = () => emojisList.sort(() => Math.random() - 0.5)
@@ -122,10 +153,25 @@ class EmojiGame extends Component {
   }
 
   render() {
-    const {emojisList} = this.state
-    return (
-      <div className="MainContainer">
-        <NavbarItem />
+    const {emojisList, count, topScore, result, won, scoreCard} = this.state
+    console.log(scoreCard)
+    const scoreBoard = {SCORE: count, TOPSCORE: topScore}
+    let resultCard
+    if (result === true) {
+      if (won === true) {
+        resultCard = <Win result={won} startGame={this.startGame} />
+      } else {
+        console.log(count)
+        resultCard = (
+          <Loose
+            result={won}
+            scoreCard={scoreCard}
+            startGame={this.startGame}
+          />
+        )
+      }
+    } else {
+      resultCard = (
         <div className="cardsContainer">
           <ul className="UnorderedList">
             {emojisList.map(eachItem => (
@@ -137,6 +183,12 @@ class EmojiGame extends Component {
             ))}
           </ul>
         </div>
+      )
+    }
+    return (
+      <div className="MainContainer">
+        <NavbarItem item={scoreBoard} />
+        <div className="rContainer">{resultCard}</div>
       </div>
     )
   }
