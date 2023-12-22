@@ -1,0 +1,28 @@
+.MainContainer {
+  background-image: linear-gradient(#9796f0, #fbc7d4);
+  height: 100vh;
+}
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px;
+}
+@media (max-width: 576px) {
+  .cardsContainer {
+    margin-top: 150px;
+  }
+}
+.UnorderedList {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 576px) {
+  .UnorderedList {
+    width: 100%;
+    padding: 0;
+  }
+}

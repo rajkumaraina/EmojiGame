@@ -1,0 +1,48 @@
+.navbarContainer {
+  background-color: #ffffff33;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.insideNavBarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+}
+@media (max-width: 576px) {
+  .insideNavBarContainer {
+    width: 90%;
+  }
+}
+.logoImg {
+  width: 35px;
+  margin-top: 8px;
+  height: 35px;
+}
+@media (max-width: 576px) {
+  .logoImg {
+    width: 25px;
+    height: 25px;
+    margin-top: 15px;
+  }
+}
+.navbarInsideContainer {
+  display: flex;
+}
+.emojiLogoPara {
+  color: #ffffff;
+  font-weight: bold;
+  margin-left: 8px;
+}
+.EmojiNavbarPara {
+  color: #ffffff;
+  font-weight: 500;
+  margin-left: 50px;
+}
+@media (max-width: 576px) {
+  .EmojiNavbarPara {
+    margin-left: 25px;
+  }
+}
