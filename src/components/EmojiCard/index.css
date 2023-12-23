@@ -31,3 +31,9 @@
     height: 55px;
   }
 }
+.ButtonEmoji {
+  border: 0 none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+}

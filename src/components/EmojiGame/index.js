@@ -12,7 +12,7 @@ const shuffledEmojisList = () => {
 
 import {Component} from 'react'
 
-import NavbarItem from '../NavBar'
+import {WinNavbarItem, LooseNavbarItem} from '../NavBar'
 
 import {Win, Loose} from '../WinOrLoseCard'
 
@@ -105,7 +105,14 @@ class EmojiGame extends Component {
   }
 
   startGame = () => {
-    this.setState({emojiClicked: [], result: false})
+    const {count, topScore} = this.state
+    let bestScore
+    if (count >= topScore) {
+      bestScore = count
+    } else {
+      bestScore = topScore
+    }
+    this.setState({emojiClicked: [], result: false, topScore: bestScore})
   }
 
   emojiClicked = id => {
@@ -121,9 +128,8 @@ class EmojiGame extends Component {
     const isEmojiClicked = emojiClicked.includes(
       emojiClicked.find(eachItem => eachItem.id === id),
     )
-    if (count === 12) {
-      this.setState({won: true})
-    }
+    console.log(emojiClicked.length)
+
     if (isEmojiClicked === true) {
       console.log('You lost the game')
       console.log(count)
@@ -138,6 +144,7 @@ class EmojiGame extends Component {
         won: false,
         result: !result,
         scoreCard: count,
+        emojiClicked: [],
       })
     } else {
       console.log('Continue')
@@ -146,6 +153,9 @@ class EmojiGame extends Component {
         emojiClicked: [...prevState.emojiClicked, item],
         count: prevState.count + 1,
       }))
+    }
+    if (emojiClicked.length - 1 === standardList.length) {
+      this.setState({won: true})
     }
 
     const shuffledEmojisList = () => emojisList.sort(() => Math.random() - 0.5)
@@ -185,9 +195,17 @@ class EmojiGame extends Component {
         </div>
       )
     }
+    let NavbarToDisplay
+    if (result === true) {
+      NavbarToDisplay = <WinNavbarItem startGame={this.startGame} />
+    } else {
+      NavbarToDisplay = (
+        <LooseNavbarItem scoreBoard={scoreBoard} startGame={this.startGame} />
+      )
+    }
     return (
       <div className="MainContainer">
-        <NavbarItem item={scoreBoard} />
+        {NavbarToDisplay}
         <div className="rContainer">{resultCard}</div>
       </div>
     )

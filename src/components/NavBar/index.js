@@ -1,8 +1,23 @@
 import './index.css'
 
-const NavbarItem = props => {
-  const {item} = props
-  const {SCORE, TOPSCORE} = item
+const WinNavbarItem = props => (
+  <div className="navbarContainer">
+    <div className="insideNavBarContainer">
+      <div className="navbarInsideContainer">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/game-logo-img.png"
+          alt="emoji logo"
+          className="logoImg"
+        />
+        <h1 className="emojiLogoPara">Emoji Game</h1>
+      </div>
+    </div>
+  </div>
+)
+
+const LooseNavbarItem = props => {
+  const {scoreBoard} = props
+  const {SCORE, TOPSCORE} = scoreBoard
   return (
     <div className="navbarContainer">
       <div className="insideNavBarContainer">
@@ -12,7 +27,7 @@ const NavbarItem = props => {
             alt="emoji logo"
             className="logoImg"
           />
-          <p className="emojiLogoPara">Emoji Game</p>
+          <h1 className="emojiLogoPara">Emoji Game</h1>
         </div>
         <div className="navbarInsideContainer">
           <p className="EmojiNavbarPara">Score: {SCORE}</p>
@@ -23,4 +38,4 @@ const NavbarItem = props => {
   )
 }
 
-export default NavbarItem
+export {WinNavbarItem, LooseNavbarItem}
