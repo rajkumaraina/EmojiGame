@@ -1,6 +1,6 @@
 import './index.css'
 
-const WinNavbarItem = props => (
+const WinNavbarItem = () => (
   <div className="navbarContainer">
     <div className="insideNavBarContainer">
       <div className="navbarInsideContainer">

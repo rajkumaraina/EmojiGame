@@ -7,6 +7,7 @@ const shuffledEmojisList = () => {
   const {emojisList} = this.props
   return emojisList.sort(() => Math.random() - 0.5)
 }
+   
 
 */
 
@@ -105,14 +106,21 @@ class EmojiGame extends Component {
   }
 
   startGame = () => {
-    const {count, topScore} = this.state
+    const {scoreCard, topScore} = this.state
     let bestScore
-    if (count >= topScore) {
-      bestScore = count
+    if (scoreCard > topScore) {
+      bestScore = scoreCard
+    } else if (bestScore === 11) {
+      bestScore = 0
     } else {
       bestScore = topScore
     }
-    this.setState({emojiClicked: [], result: false, topScore: bestScore})
+    this.setState({
+      emojiClicked: [],
+      result: false,
+      won: false,
+      topScore: bestScore,
+    })
   }
 
   emojiClicked = id => {
@@ -121,25 +129,17 @@ class EmojiGame extends Component {
       emojiClicked,
       standardList,
       count,
-      topScore,
       result,
+      topScore,
+      scoreCard,
     } = this.state
-    let bestScore
     const isEmojiClicked = emojiClicked.includes(
       emojiClicked.find(eachItem => eachItem.id === id),
     )
-    console.log(emojiClicked.length)
 
     if (isEmojiClicked === true) {
       console.log('You lost the game')
-      console.log(count)
-      if (count >= topScore) {
-        bestScore = count
-      } else {
-        bestScore = topScore
-      }
       this.setState({
-        topScore: bestScore,
         count: 0,
         won: false,
         result: !result,
@@ -148,14 +148,15 @@ class EmojiGame extends Component {
       })
     } else {
       console.log('Continue')
-      const item = standardList.find(each => each.id === id)
-      this.setState(prevState => ({
-        emojiClicked: [...prevState.emojiClicked, item],
-        count: prevState.count + 1,
-      }))
-    }
-    if (emojiClicked.length - 1 === standardList.length) {
-      this.setState({won: true})
+      if (emojiClicked.length === 11) {
+        this.setState({won: true, result: !result, count: 0})
+      } else {
+        const item = standardList.find(each => each.id === id)
+        this.setState(prevState => ({
+          emojiClicked: [...prevState.emojiClicked, item],
+          count: prevState.count + 1,
+        }))
+      }
     }
 
     const shuffledEmojisList = () => emojisList.sort(() => Math.random() - 0.5)
@@ -164,7 +165,6 @@ class EmojiGame extends Component {
 
   render() {
     const {emojisList, count, topScore, result, won, scoreCard} = this.state
-    console.log(scoreCard)
     const scoreBoard = {SCORE: count, TOPSCORE: topScore}
     let resultCard
     if (result === true) {
@@ -197,7 +197,9 @@ class EmojiGame extends Component {
     }
     let NavbarToDisplay
     if (result === true) {
-      NavbarToDisplay = <WinNavbarItem startGame={this.startGame} />
+      NavbarToDisplay = (
+        <WinNavbarItem scoreBoard={scoreBoard} startGame={this.startGame} />
+      )
     } else {
       NavbarToDisplay = (
         <LooseNavbarItem scoreBoard={scoreBoard} startGame={this.startGame} />

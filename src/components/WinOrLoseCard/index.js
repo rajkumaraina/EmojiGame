@@ -11,7 +11,12 @@ const Win = props => {
         <h1 className="resultHeading">You Won</h1>
         <p className="resultPara">Best Score</p>
         <p className="resultPara1">12/12</p>
-        <button className="playAgainButton" type="button" onClick={playAgain}>
+        <button
+          className="playAgainButton"
+          type="button"
+          onClick={playAgain}
+          data-testid="delete"
+        >
           Play Again
         </button>
       </div>
@@ -26,7 +31,6 @@ const Win = props => {
 
 const Loose = props => {
   const {startGame, scoreCard} = props
-  console.log(scoreCard)
   const playAgain = () => {
     startGame()
   }
@@ -36,7 +40,12 @@ const Loose = props => {
         <h1 className="resultHeading">You Lose</h1>
         <p className="resultPara"> Score</p>
         <p className="resultPara1">{scoreCard}/12</p>
-        <button className="playAgainButton" type="button" onClick={playAgain}>
+        <button
+          className="playAgainButton"
+          type="button"
+          onClick={playAgain}
+          data-testid="delete"
+        >
           Play Again
         </button>
       </div>
