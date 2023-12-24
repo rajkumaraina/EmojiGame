@@ -106,20 +106,10 @@ class EmojiGame extends Component {
   }
 
   startGame = () => {
-    const {scoreCard, topScore} = this.state
-    let bestScore
-    if (scoreCard > topScore) {
-      bestScore = scoreCard
-    } else if (bestScore === 11) {
-      bestScore = 12
-    } else {
-      bestScore = topScore
-    }
     this.setState({
       emojiClicked: [],
       result: false,
       won: false,
-      topScore: bestScore,
     })
   }
 
@@ -131,7 +121,6 @@ class EmojiGame extends Component {
       count,
       result,
       topScore,
-      scoreCard,
     } = this.state
     const isEmojiClicked = emojiClicked.includes(
       emojiClicked.find(eachItem => eachItem.id === id),
@@ -139,17 +128,26 @@ class EmojiGame extends Component {
 
     if (isEmojiClicked === true) {
       console.log('You lost the game')
+      let bestScore
+      if (count > topScore) {
+        bestScore = count
+      } else if (bestScore === 11) {
+        bestScore = 12
+      } else {
+        bestScore = topScore
+      }
       this.setState({
         count: 0,
         won: false,
         result: !result,
         scoreCard: count,
         emojiClicked: [],
+        topScore: bestScore,
       })
     } else {
       console.log('Continue')
       if (emojiClicked.length === 11) {
-        this.setState({won: true, result: !result, count: 12})
+        this.setState({won: true, result: !result, count: 0, topScore: 12})
       } else {
         const item = standardList.find(each => each.id === id)
         this.setState(prevState => ({

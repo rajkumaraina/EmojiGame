@@ -23,9 +23,9 @@
 }
 @media (max-width: 576px) {
   .logoImg {
-    width: 25px;
-    height: 25px;
-    margin-top: 15px;
+    width: 30px;
+    height: 30px;
+    margin-top: 13px;
   }
 }
 .navbarInsideContainer {
@@ -44,5 +44,12 @@
 @media (max-width: 576px) {
   .EmojiNavbarPara {
     margin-left: 25px;
+  }
+  .emojiLogoPara {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 15px;
+    margin-left: 8px;
   }
 }
