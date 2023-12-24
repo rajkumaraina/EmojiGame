@@ -111,7 +111,7 @@ class EmojiGame extends Component {
     if (scoreCard > topScore) {
       bestScore = scoreCard
     } else if (bestScore === 11) {
-      bestScore = 0
+      bestScore = 12
     } else {
       bestScore = topScore
     }
@@ -149,7 +149,7 @@ class EmojiGame extends Component {
     } else {
       console.log('Continue')
       if (emojiClicked.length === 11) {
-        this.setState({won: true, result: !result, count: 0})
+        this.setState({won: true, result: !result, count: 12})
       } else {
         const item = standardList.find(each => each.id === id)
         this.setState(prevState => ({
@@ -171,7 +171,6 @@ class EmojiGame extends Component {
       if (won === true) {
         resultCard = <Win result={won} startGame={this.startGame} />
       } else {
-        console.log(count)
         resultCard = (
           <Loose
             result={won}
