@@ -29,6 +29,12 @@
   .emojiImg {
     width: 55px;
     height: 55px;
+    cursor: pointer;
+    outline: none;
+  }
+  .eachEmojiContainer {
+    outline: none;
+    cursor: pointer;
   }
 }
 .ButtonEmoji {

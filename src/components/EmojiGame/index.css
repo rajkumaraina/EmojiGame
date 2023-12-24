@@ -17,6 +17,9 @@
   .cardsContainer {
     margin-top: 150px;
   }
+  .ButtonEmoji {
+    outline: none;
+  }
 }
 .UnorderedList {
   width: 60%;
